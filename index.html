@@ -1,57 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Samarth 💜</title>
+
 <style>
-body{margin:0;font-family:Arial;background:#b57be8;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;overflow:hidden}
-.s{display:none;padding:20px}
-.a{display:block}
-button{padding:12px 25px;font-size:18px;border:none;border-radius:20px;margin:10px}
-#yes{background:#fff;color:#8a2be2}
-#no{background:#ff4d6d;color:#fff;position:absolute}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, sans-serif;
+background:#b57be8;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+overflow:hidden;
+text-align:center;
+padding:20px;
+}
+
+.s{
+display:none;
+width:100%;
+max-width:500px;
+animation:fade .6s ease;
+}
+
+.a{
+display:block;
+}
+
+h1{
+font-size:32px;
+line-height:1.5;
+margin-bottom:20px;
+}
+
+h2{
+margin-top:20px;
+}
+
+p{
+font-size:18px;
+margin:15px 0;
+}
+
+button{
+padding:12px 30px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+margin:10px;
+transition:.3s;
+}
+
+#yes,
+#next,
+#finish{
+background:white;
+color:#8a2be2;
+}
+
+#yes:hover,
+#next:hover,
+#finish:hover{
+transform:scale(1.05);
+}
+
+#no{
+background:#ff4d6d;
+color:white;
+position:absolute;
+}
+
+select,
+textarea{
+width:90%;
+max-width:350px;
+padding:12px;
+font-size:17px;
+border:none;
+border-radius:12px;
+outline:none;
+margin-top:10px;
+}
+
+textarea{
+height:100px;
+resize:none;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
 </style>
+
 </head>
+
 <body>
-
-<div class="s a"><h1>Heyy Samarth 💜</h1></div>
-
-<div class="s"><h1>I have a little surprise for you ❤️</h1></div>
-
-<div class="s"><h1>I want to ask you something 🥹</h1></div>
-
-<div class="s">
-<h1>Would you like to go on a date with me? 💜</h1>
-<button id="yes">YES 💜</button>
-<button id="no">NO 😅</button>
-<p id="msg"></p>
+<div class="s a">
+<h1>Hey Samarth 💜</h1>
+<p>Tap anywhere to continue ❤️</p>
 </div>
 
+<div class="s">
+<h1>I have a little surprise for you ❤️</h1>
+<p>Tap anywhere to continue 🥹</p>
+</div>
+
+<div class="s">
+<h1>I want to ask you something 🥹</h1>
+<p>Tap anywhere to continue 💕</p>
+</div>
+
+<div class="s">
+<h1>Will you go on a date with me? 💕</h1>
+
+<button id="yes">YES ❤️</button>
+<button id="no">NO 🙈</button>
+
+</div>
+
+<div class="s">
+
+<h1>Where would you like to go? 💕</h1>
+
+<select id="place">
+
+<option selected disabled>Select a place</option>
+
+<option>🍻 Pub</option>
+
+<option>🍸 Resto Pub</option>
+
+<option>🤍 A private place with very few people</option>
+
+<option>🍽️ Restaurant</option>
+
+<option>🏔️ Long drive to a mountain side</option>
+
+</select>
+
+<br><br>
+
+<p>❤️ Or write your own choice</p>
+
+<textarea
+id="customPlace"
+placeholder="Type your favourite place here..."></textarea>
+
+<br><br>
+
+<button id="next">Next ❤️</button>
+
+</div>
+
+<div class="s">
+
+<h1>What would you like to eat? 🍕</h1>
+
+<textarea
+id="food"
+placeholder="Write anything you'd like to eat..."></textarea>
+
+<br><br>
+
+<button id="finish">Finish ❤️</button>
+
+</div>
+
+<div class="s">
+
+<h1>❤️ Thank you for saying YES! ❤️</h1>
+
+<p>I can't wait to spend this special day with you. 🥹💜</p>
+
+<p>💕 See you soon! 💕</p>
+
+</div>
 <script>
-const s=document.querySelectorAll(".s");
-let i=0;
 
-document.body.onclick=e=>{
-if(e.target.tagName=="BUTTON")return;
-if(i<3){
-s[i].classList.remove("a");
-i++;
-s[i].classList.add("a");
+const slides = document.querySelectorAll(".s");
+let current = 0;
+
+function showSlide(index){
+slides.forEach(slide=>slide.classList.remove("a"));
+slides[index].classList.add("a");
+current=index;
 }
-};
 
+// Tap anywhere for the first 3 slides
+document.body.addEventListener("click",function(e){
+
+if(
+e.target.tagName==="BUTTON" ||
+e.target.tagName==="SELECT" ||
+e.target.tagName==="TEXTAREA"
+){
+return;
+}
+
+if(current<3){
+showSlide(current+1);
+}
+
+});
+
+// Moving NO button
 const no=document.getElementById("no");
-no.onmouseover=no.ontouchstart=()=>{
-no.style.left=Math.random()*(innerWidth-100)+"px";
-no.style.top=Math.random()*(innerHeight-60)+"px";
-};
 
-document.getElementById("yes").onclick=()=>{
-document.getElementById("msg").innerHTML="❤️ Yay!! You made me the happiest person! ❤️";
-no.style.display="none";
-};
+function moveNo(){
+
+const x=Math.random()*(window.innerWidth-150);
+const y=Math.random()*(window.innerHeight-100);
+
+no.style.left=x+"px";
+no.style.top=y+"px";
+
+}
+
+no.addEventListener("mouseover",moveNo);
+no.addEventListener("touchstart",function(e){
+e.preventDefault();
+moveNo();
+});
+
+// YES button
+document.getElementById("yes").addEventListener("click",function(){
+showSlide(4);
+});
+
+// Next button
+document.getElementById("next").addEventListener("click",function(){
+showSlide(5);
+});
+
+// Finish button
+document.getElementById("finish").addEventListener("click",function(){
+showSlide(6);
+});
 
 </script>
 
 </body>
 </html>
+  
