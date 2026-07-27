@@ -1,160 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>For Samarth 💜</title>
-
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#7b2cbf,#c77dff,#e0aaff);
-overflow:hidden;
-}
-
-.container{
-text-align:center;
-color:white;
-padding:20px;
-}
-
-h1{
-font-size:40px;
-margin-bottom:20px;
-}
-
-p{
-font-size:22px;
-margin-bottom:30px;
-}
-
-button{
-padding:15px 35px;
-font-size:18px;
-border:none;
-border-radius:30px;
-cursor:pointer;
-margin:10px;
-transition:0.3s;
-}
-
-#yes{
-background:#ffffff;
-color:#7b2cbf;
-}
-
-#no{
-background:#ff4d6d;
-color:white;
-position:absolute;
-}
-
-#message{
-display:none;
-font-size:28px;
-margin-top:30px;
-font-weight:bold;
-}
-
-.heart{
-position:absolute;
-font-size:24px;
-animation:float 4s linear forwards;
-}
-
-@keyframes float{
-0%{
-transform:translateY(0);
-opacity:1;
-}
-100%{
-transform:translateY(-100vh);
-opacity:0;
-}
-}
+body{margin:0;font-family:Arial;background:#b57be8;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;overflow:hidden}
+.s{display:none;padding:20px}
+.a{display:block}
+button{padding:12px 25px;font-size:18px;border:none;border-radius:20px;margin:10px}
+#yes{background:#fff;color:#8a2be2}
+#no{background:#ff4d6d;color:#fff;position:absolute}
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<div class="s a"><h1>Heyy Samarth 💜</h1></div>
 
-<h1>Hey Samarth 💜</h1>
+<div class="s"><h1>I have a little surprise for you ❤️</h1></div>
 
-<p>Will you go on a date with me?</p>
+<div class="s"><h1>I want to ask you something 🥹</h1></div>
 
+<div class="s">
+<h1>Would you like to go on a date with me? 💜</h1>
 <button id="yes">YES 💜</button>
-
 <button id="no">NO 😅</button>
-
-<div id="message">
-Yay!! 💜<br>
-You made me the happiest person! ❤️
-</div>
-
+<p id="msg"></p>
 </div>
 
 <script>
-  const yes=document.getElementById("yes");
-const no=document.getElementById("no");
-const message=document.getElementById("message");
+const s=document.querySelectorAll(".s");
+let i=0;
 
-no.addEventListener("mouseover",moveButton);
-no.addEventListener("touchstart",moveButton);
-
-function moveButton(){
-
-const x=Math.random()*(window.innerWidth-120);
-const y=Math.random()*(window.innerHeight-80);
-
-no.style.left=x+"px";
-no.style.top=y+"px";
-
+document.body.onclick=e=>{
+if(e.target.tagName=="BUTTON")return;
+if(i<3){
+s[i].classList.remove("a");
+i++;
+s[i].classList.add("a");
 }
+};
 
-yes.addEventListener("click",()=>{
+const no=document.getElementById("no");
+no.onmouseover=no.ontouchstart=()=>{
+no.style.left=Math.random()*(innerWidth-100)+"px";
+no.style.top=Math.random()*(innerHeight-60)+"px";
+};
 
-message.style.display="block";
-
-yes.style.display="none";
+document.getElementById("yes").onclick=()=>{
+document.getElementById("msg").innerHTML="❤️ Yay!! You made me the happiest person! ❤️";
 no.style.display="none";
+};
 
-for(let i=0;i<80;i++){
-
-const heart=document.createElement("div");
-
-heart.className="heart";
-
-heart.innerHTML=Math.random()>0.5?"💜":"❤️";
-
-heart.style.left=Math.random()*100+"vw";
-
-heart.style.top="100vh";
-
-heart.style.fontSize=(18+Math.random()*25)+"px";
-
-heart.style.animationDuration=(3+Math.random()*2)+"s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>{
-heart.remove();
-},5000);
-  </script>
+</script>
 
 </body>
 </html>
-
-}
-
-});
