@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise ❤️</title>
+
+<style>
+body{
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#ffd6e8,#ffeef5);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+text-align:center;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:0 0 20px rgba(0,0,0,0.2);
+width:85%;
+max-width:400px;
+}
+
+h1{
+color:#ff4081;
+}
+
+p{
+font-size:18px;
+color:#444;
+}
+
+button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+margin:10px;
+transition:.3s;
+}
+
+#yes{
+background:#ff4081;
+color:white;
+}
+
+#no{
+background:#666;
+color:white;
+position:relative;
+}
+
+.heart{
+position:absolute;
+color:pink;
+font-size:24px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-120vh);}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+<h1>Hey ❤️</h1>
+
+<p>I have something to ask you...</p>
+
+<h2>Will you go on a date with me? 🥹</h2>
+
+<button id="yes" onclick="yesClick()">Yes 💖</button>
+
+<button id="no" onmouseover="moveButton()">No 😅</button>
+
+</div>
+
+<script>
+
+function yesClick(){
+document.body.innerHTML="<div style='display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;text-align:center;background:#ffd6e8;'><div><h1 style='color:#ff4081;'>Yay!! ❤️</h1><h2>You just made my day 🥹💖</h2><h3>Can't wait for our date 🌸</h3></div></div>";
+}
+
+function moveButton(){
+var btn=document.getElementById("no");
+var x=Math.random()*(window.innerWidth-100);
+var y=Math.random()*(window.innerHeight-60);
+btn.style.position="absolute";
+btn.style.left=x+"px";
+btn.style.top=y+"px";
+}
+
+for(let i=0;i<30;i++){
+let heart=document.createElement("div");
+heart.innerHTML="💖";
+heart.className="heart";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(heart);
+}
+
+</script>
+
+</body>
+</html>
